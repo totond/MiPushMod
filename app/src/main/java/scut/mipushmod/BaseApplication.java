@@ -25,12 +25,14 @@ public class BaseApplication extends Application{
     // com.xiaomi.mipushdemo
     public static final String TAG = "scut.mipushmod";
 
+    //检测是否需要开启监听的变量
     public static boolean shouldListen = false;
     private static AppHandler sHandler = null;
 
     private NetWorkStateReceiver netWorkStateReceiver;
     //检测netWorkStateReceiver广播是否已注册的变量
-    private boolean isReceiverReg = false;
+    public static boolean isReceiverReg = false;
+
 
     @Override
     public void onCreate() {
@@ -44,11 +46,12 @@ public class BaseApplication extends Application{
         }else {
             System.out.println("网络无连接，启动监听");
             shouldListen = true;
+            regBroadcastReceiver();
         }
+        //实例化Handler
         if (sHandler == null){
             sHandler = new AppHandler();
         }
-        regBroadcastReceiver();
     }
 
     @Override
@@ -103,6 +106,7 @@ public class BaseApplication extends Application{
         return sHandler;
     }
 
+
     //注册广播
     public void regBroadcastReceiver(){
         if (netWorkStateReceiver == null) {
@@ -141,9 +145,12 @@ public class BaseApplication extends Application{
                     startPush();
                     break;
                 case 0:
-                    //注册成功时候回调
-                    System.out.println("注册成功时候回调");
+                    //注销广播
                     unRegBroadcastReceiver();
+                    break;
+                case 2:
+                    //启动广播
+                    regBroadcastReceiver();
                     break;
             }
         }

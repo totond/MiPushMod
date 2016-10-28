@@ -9,7 +9,7 @@ import android.os.Message;
 import android.widget.Toast;
 
 /**
- * Created by yany on 2016/10/27.
+ * 监听网络变化的Receiver
  */
 public class NetWorkStateReceiver extends BroadcastReceiver {
 

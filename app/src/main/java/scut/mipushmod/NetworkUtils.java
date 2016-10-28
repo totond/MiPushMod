@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
  * Created by yany on 2016/10/27.
  */
 public class NetworkUtils {
+    //检测是否有Wifi或移动数据连接
     public static boolean isWifiOrDataConn(Context context){
         ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         //根据手机的Android API版本来决定用哪种方式获取网络状态

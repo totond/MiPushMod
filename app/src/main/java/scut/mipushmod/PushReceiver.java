@@ -45,9 +45,11 @@ public class PushReceiver extends PushMessageReceiver {
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 System.out.println("注册推送成功，mRegId =" + cmdArg1);
+                //回调注销广播
                 Message msg = BaseApplication.getsHandler().obtainMessage();
                 msg.what = 0;
                 BaseApplication.getsHandler().sendMessage(msg);
+                BaseApplication.shouldListen = false;
 
             } else {
                 System.out.println("注册推送失败，重新注册");
